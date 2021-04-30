@@ -15,7 +15,7 @@ import star from '../../../../assets/star';
 
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {
-    name = 'Some Restaurant',
+    name,
     icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
     photos = [
       'https://images.pexels.com/photos/1639565/pexels-photo-1639565.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',

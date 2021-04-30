@@ -14,10 +14,9 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
-import { Entypo, Feather, Ionicons } from '@expo/vector-icons';
-// <Entypo name="map" size={24} color="black" />
-// <Feather name="settings" size={24} color="black" />
-// <Ionicons name="restaurant-outline" size={24} color="black" />
+import { Ionicons } from '@expo/vector-icons';
+import { RestaurantContextProvider } from './src/services/restaurants/restaurant.context';
+import { LocationContextProvider } from './src/services/locations/location.context';
 
 const SettingsScreen = () => (
   <View>
@@ -68,17 +67,24 @@ export default function App() {
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <Tab.Navigator
-          screenOptions={createScreenOptions}
-          tabBarOptions={{
-            activeTintColor: 'tomato',
-            inactiveTintColor: 'gray',
-          }}
-        >
-          <Tab.Screen name={ROUTES.Restaurant} component={RestaurantsScreen} />
-          <Tab.Screen name={ROUTES.Settings} component={SettingsScreen} />
-          <Tab.Screen name={ROUTES.Map} component={MapScreen} />
-        </Tab.Navigator>
+        <LocationContextProvider>
+          <RestaurantContextProvider>
+            <Tab.Navigator
+              screenOptions={createScreenOptions}
+              tabBarOptions={{
+                activeTintColor: 'tomato',
+                inactiveTintColor: 'gray',
+              }}
+            >
+              <Tab.Screen
+                name={ROUTES.Restaurant}
+                component={RestaurantsScreen}
+              />
+              <Tab.Screen name={ROUTES.Settings} component={SettingsScreen} />
+              <Tab.Screen name={ROUTES.Map} component={MapScreen} />
+            </Tab.Navigator>
+          </RestaurantContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
     </NavigationContainer>
   );
