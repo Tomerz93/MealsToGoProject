@@ -16,10 +16,22 @@ export const Info = styled.View`
 `;
 
 export const RatingContainer = styled.View`
-  display: flex;
   flex-direction: row;
-  padding: 5px 0;
+  padding-top: ${(props) => props.theme.space[2]};
+  padding-bottom: ${(props) => props.theme.space[2]};
 `;
+
+export const Section = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const SectionEnd = styled.View`
+  margin-left: auto;
+  flex-direction: row;
+  justify-content: center;
+`;
+
 export const IsClosedTemporaryContainer = styled.View`
   margin-left: auto;
 `;

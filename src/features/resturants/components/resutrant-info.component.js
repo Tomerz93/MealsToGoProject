@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { Spacer } from '../../../components/spacer/spacer.component';
 import { Text } from '../../../components/typography/text.component';
@@ -8,10 +7,13 @@ import {
   RestaurantCardCover,
   Info,
   Icon,
+  SectionEnd,
+  Section,
   RatingContainer,
   IsClosedTemporaryContainer,
 } from './restaurant-info-styles';
 import star from '../../../../assets/star';
+import open from '../../../../assets/open';
 
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {
@@ -31,27 +33,31 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant="label">{name}</Text>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-        >
+        <Section>
           <RatingContainer>
             {stars.map((_, index) => (
-              <SvgXml key={index} xml={star} width={20} height={20} />
+              <SvgXml
+                key={`${name}-${index}`}
+                xml={star}
+                width={20}
+                height={20}
+              />
             ))}
           </RatingContainer>
-          {isClosedTemporary && (
-            <IsClosedTemporaryContainer>
-              <Text variant="error">CLOSED TEMPORARILY</Text>
-            </IsClosedTemporaryContainer>
-          )}
-          <Spacer position="left" size="large">
-            <Icon source={{ uri: icon }} />
-          </Spacer>
-        </View>
+          <SectionEnd>
+            {isClosedTemporary && (
+              <IsClosedTemporaryContainer>
+                <Text variant="error">CLOSED TEMPORARILY</Text>
+              </IsClosedTemporaryContainer>
+            )}
+            <Spacer position="left" size="large">
+              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+            </Spacer>
+            <Spacer position="left" size="large">
+              <Icon source={{ uri: icon }} />
+            </Spacer>
+          </SectionEnd>
+        </Section>
         <Text variant="caption">{address}</Text>
       </Info>
     </RestaurantCard>

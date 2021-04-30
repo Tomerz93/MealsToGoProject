@@ -35,7 +35,7 @@ export const RestaurantsScreen = () => {
       <RestaurantList
         data={restaurants}
         renderItem={({ item }) => {
-          return <RestaurantInfo restaurant={item} />;
+          return <RestaurantInfo key={item.name} restaurant={item} />;
         }}
         keyExtractor={(i) => i.name}
       />

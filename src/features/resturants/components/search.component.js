@@ -9,9 +9,7 @@ const SearchBarContainer = styled.View`
 export const Search = () => {
   const { keyword, onSearch } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
-  useEffect(() => {
-    onSearch(searchKeyword);
-  }, []);
+
   return (
     <SearchBarContainer>
       <Searchbar
