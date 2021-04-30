@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  createContext,
-  useEffect,
-  useMemo,
-  useContext,
-} from 'react';
+import React, { useState, createContext, useEffect, useContext } from 'react';
 import { restaurantTransform, getRestaurants } from './restaurant.service';
 import { LocationContext } from '../locations/location.context';
 export const RestaurantContext = createContext();
@@ -17,7 +11,7 @@ export const RestaurantContextProvider = ({ children }) => {
   useEffect(() => {
     setIsLoading(true);
     setRestaurants([]);
-    const getData = async () => {
+    (async () => {
       try {
         const restaurantRawData = await getRestaurants(
           `${location.lat},${location.lng}`
@@ -28,10 +22,7 @@ export const RestaurantContextProvider = ({ children }) => {
         setError(error);
         setIsLoading(false);
       }
-    };
-    setTimeout(() => {
-      getData();
-    }, 2000);
+    })();
   }, [location]);
 
   return (

@@ -13,9 +13,10 @@ export const LocationContextProvider = ({ children }) => {
     setIsLoading(true);
     setKeyword(searchKeyword);
   };
+
   useEffect(() => {
     if (!keyword.length) return;
-    console.log('running', keyword);
+
     (async () => {
       try {
         const rawLocation = await locationRequest(keyword.toLowerCase());
