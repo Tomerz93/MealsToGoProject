@@ -7,6 +7,7 @@ export const MenuAccordion = ({ items }) => {
       {items.map(
         ({ items, accordionTitle, icon, expanded, onPress }, index) => (
           <List.Accordion
+            key={accordionTitle}
             title={accordionTitle}
             expanded={expanded}
             onPress={onPress}
@@ -14,7 +15,7 @@ export const MenuAccordion = ({ items }) => {
             left={(props) => <List.Icon {...props} icon={icon} />}
           >
             {items.map((item) => (
-              <List.Item title={item} />
+              <List.Item key={item} title={item} />
             ))}
           </List.Accordion>
         )

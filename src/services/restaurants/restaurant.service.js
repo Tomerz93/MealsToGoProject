@@ -16,10 +16,12 @@ const transformRestaurant = ({
   rating,
   vicinity,
   business_status,
+  geometry,
   opening_hours = {},
 }) => ({
   icon: icon,
   name: name,
+  geometry,
   rating: rating,
   photos: mockImages.map(
     (_) => mockImages[Math.ceil(Math.random() * mockImages.length - 1)]
