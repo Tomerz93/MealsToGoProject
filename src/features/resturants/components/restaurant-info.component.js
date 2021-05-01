@@ -14,6 +14,8 @@ import {
 } from './restaurant-info-styles';
 import star from '../../../../assets/star';
 import open from '../../../../assets/open';
+import { View } from 'react-native';
+import { Favorite } from '../../../components/Favorites/favorite.component';
 
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {
@@ -30,6 +32,9 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
   const stars = Array.from(new Array(Math.floor(rating)));
   return (
     <RestaurantCard elevation={5}>
+      <View>
+        <Favorite restaurant={restaurant} />
+      </View>
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant="label">{name}</Text>

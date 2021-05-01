@@ -17,19 +17,23 @@ const transformRestaurant = ({
   vicinity,
   business_status,
   geometry,
+  place_id,
   opening_hours = {},
-}) => ({
-  icon: icon,
-  name: name,
-  geometry,
-  rating: rating,
-  photos: mockImages.map(
-    (_) => mockImages[Math.ceil(Math.random() * mockImages.length - 1)]
-  ),
-  address: vicinity,
-  isClosedTemporary: business_status === 'CLOSED_TEMPORARILY',
-  isOpenNow: opening_hours.open_now,
-});
+}) => {
+  return {
+    icon: icon,
+    name: name,
+    geometry,
+    place_id,
+    rating: rating,
+    photos: mockImages.map(
+      (_) => mockImages[Math.ceil(Math.random() * mockImages.length - 1)]
+    ),
+    address: vicinity,
+    isClosedTemporary: business_status === 'CLOSED_TEMPORARILY',
+    isOpenNow: opening_hours.open_now,
+  };
+};
 
 export const restaurantTransform = ({ results = [] }) => {
   return camelize(results.map(transformRestaurant));
