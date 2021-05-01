@@ -1,5 +1,4 @@
 import React from 'react';
-import { RestaurantsScreen } from './src/features/resturants/screens/resturants.screen';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './src/infra/theme';
 import {
@@ -11,48 +10,9 @@ import {
   Lato_400Regular,
   Lato_700Bold,
 } from '@expo-google-fonts/lato';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Navigation } from './src/infra/navigation/index';
 import { RestaurantContextProvider } from './src/services/restaurants/restaurant.context';
 import { LocationContextProvider } from './src/services/locations/location.context';
-
-const SettingsScreen = () => (
-  <View>
-    <Text>Settings</Text>
-  </View>
-);
-const MapScreen = () => (
-  <View>
-    <Text>Settings</Text>
-  </View>
-);
-
-const Tab = createBottomTabNavigator();
-
-const ROUTES = {
-  Restaurant: 'Restaurant',
-  Settings: 'Settings',
-  Map: 'Map',
-};
-
-const TAB_ICONS = {
-  Restaurant: 'restaurant-outline',
-  Settings: 'settings',
-  Map: 'map',
-};
-
-const getIcon = (name, color, size) => (
-  <Ionicons name={name} size={size} color={color} />
-);
-
-const createScreenOptions = ({ route }) => {
-  const iconName = TAB_ICONS[route.name];
-  return {
-    tabBarIcon: ({ color, size }) => getIcon(iconName, color, size),
-  };
-};
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -64,28 +24,14 @@ export default function App() {
   });
 
   if (!latoLoaded || !oswaldLoaded) return null;
+
   return (
-    <NavigationContainer>
-      <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantContextProvider>
-            <Tab.Navigator
-              screenOptions={createScreenOptions}
-              tabBarOptions={{
-                activeTintColor: 'tomato',
-                inactiveTintColor: 'gray',
-              }}
-            >
-              <Tab.Screen
-                name={ROUTES.Restaurant}
-                component={RestaurantsScreen}
-              />
-              <Tab.Screen name={ROUTES.Settings} component={SettingsScreen} />
-              <Tab.Screen name={ROUTES.Map} component={MapScreen} />
-            </Tab.Navigator>
-          </RestaurantContextProvider>
-        </LocationContextProvider>
-      </ThemeProvider>
-    </NavigationContainer>
+    <ThemeProvider theme={theme}>
+      <LocationContextProvider>
+        <RestaurantContextProvider>
+          <Navigation />
+        </RestaurantContextProvider>
+      </LocationContextProvider>
+    </ThemeProvider>
   );
 }
