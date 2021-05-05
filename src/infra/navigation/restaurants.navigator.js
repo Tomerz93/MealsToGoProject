@@ -6,7 +6,6 @@ import {
 } from '@react-navigation/stack';
 import { RestaurantsScreen } from '../../features/resturants/screens/resturants.screen';
 import { RestaurantDetailsScreen } from '../../features/resturants/screens/restaurant-details.screen';
-import { Text, View } from 'react-native';
 
 const RestaurantStack = createStackNavigator();
 

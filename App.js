@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './src/infra/theme';
 import {
@@ -11,10 +11,30 @@ import {
   Lato_700Bold,
 } from '@expo-google-fonts/lato';
 import { Navigation } from './src/infra/navigation/index';
-import { RestaurantContextProvider } from './src/services/restaurants/restaurant.context';
-import { LocationContextProvider } from './src/services/locations/location.context';
-import { FavoritesContextProvider } from './src/services/favorites/favorites.context';
+import { AuthenticationContextProvider } from './src/services/authentication/authentication.context';
+import {
+  API_KEY,
+  AUTH_DOMAIN,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+  MEASUREMENT_ID,
+} from '@env';
+import * as firebase from 'firebase';
 
+const firebaseConfig = {
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
+  measurementId: MEASUREMENT_ID,
+};
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 export default function App() {
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -23,18 +43,13 @@ export default function App() {
     Lato_400Regular,
     Lato_700Bold,
   });
-
   if (!latoLoaded || !oswaldLoaded) return null;
 
   return (
     <ThemeProvider theme={theme}>
-      <FavoritesContextProvider>
-        <LocationContextProvider>
-          <RestaurantContextProvider>
-            <Navigation />
-          </RestaurantContextProvider>
-        </LocationContextProvider>
-      </FavoritesContextProvider>
+      <AuthenticationContextProvider>
+        <Navigation />
+      </AuthenticationContextProvider>
     </ThemeProvider>
   );
 }

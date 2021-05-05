@@ -15,17 +15,13 @@ const FavoriteButton = styled(TouchableOpacity)`
 `;
 
 export const Favorite = ({ restaurant }) => {
-  const { favorites, addToFavorites, removeFromFavorites } = useContext(
-    FavoritesContext
-  );
-  const isFavorite = favorites.find((r) => r.placeId === restaurant.placeId);
+  const { favorites, toggleFavorites } = useContext(FavoritesContext);
+  const isFavorite = favorites[restaurant.placeId];
   return (
     <FavoriteButton
-      onPress={() =>
-        !isFavorite
-          ? addToFavorites(restaurant)
-          : removeFromFavorites(restaurant)
-      }
+      onPress={() => {
+        toggleFavorites(restaurant);
+      }}
     >
       <AntDesign
         name={isFavorite ? 'heart' : 'hearto'}
