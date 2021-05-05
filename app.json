@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "MealsToGo",
+    "plugins": ["expo-camera"],
     "slug": "MealsToGo",
     "version": "1.0.0",
     "orientation": "portrait",

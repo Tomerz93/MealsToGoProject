@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { List, Avatar } from 'react-native-paper';
 import { useContext } from 'react/cjs/react.development';
 import { SafeArea } from '../../../components/SafeArea/safe-area.component';
@@ -19,10 +19,16 @@ export const SettingsScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <AvatarContainer>
-        <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
-        <Spacer position="top" size="large">
-          <Text variant="label">{user.email}</Text>
-        </Spacer>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('CameraScreen');
+          }}
+        >
+          <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
+          <Spacer position="top" size="large">
+            <Text variant="label">{user.email}</Text>
+          </Spacer>
+        </TouchableOpacity>
       </AvatarContainer>
       <List.Section>
         <SettingsItem
